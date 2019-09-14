@@ -1,11 +1,3 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow
- */
-
 import React, {Fragment} from 'react';
 import {
   SafeAreaView,
@@ -17,8 +9,6 @@ import {
 } from 'react-native';
 
 import {
-  Header,
-  LearnMoreLinks,
   Colors,
   DebugInstructions,
   ReloadInstructions,
@@ -32,12 +22,6 @@ const App = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Header />
-          {global.HermesInternal == null ? null : (
-            <View style={styles.engine}>
-              <Text style={styles.footer}>Engine: Hermes</Text>
-            </View>
-          )}
           <View style={styles.body}>
             <View style={styles.sectionContainer}>
               <Text style={styles.sectionTitle}>Step One</Text>
@@ -64,7 +48,6 @@ const App = () => {
                 Read the docs to discover what to do next:
               </Text>
             </View>
-            <LearnMoreLinks />
           </View>
         </ScrollView>
       </SafeAreaView>
