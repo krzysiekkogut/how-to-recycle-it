@@ -7,9 +7,7 @@ import {
   Text,
   Button,
   Input,
-  Label,
   Item,
-  Form,
   Icon,
   H2,
 } from 'native-base';
@@ -30,10 +28,7 @@ export default class SearchScreen extends React.Component<
       <Container style={[styles.container]}>
         <Grid>
           <Row size={1} style={[styles.centerJustify, styles.centerAlign]}>
-            <H1>How to recycle it?</H1>
-          </Row>
-          <Row size={1} style={[styles.centerJustify, styles.centerAlign]}>
-            <H2>Take a picture or name it</H2>
+            <H1 style={[styles.title]}>How to recycle it?</H1>
           </Row>
           <Row size={5} style={[styles.centerJustify, styles.centerAlign]}>
             <Button
@@ -47,6 +42,9 @@ export default class SearchScreen extends React.Component<
                 type="FontAwesome"
               />
             </Button>
+          </Row>
+          <Row size={1} style={[styles.centerJustify, styles.centerAlign]}>
+            <H2>take a picture or name it</H2>
           </Row>
           <Row size={1} style={[styles.centerJustify, styles.centerAlign]}>
             <Item>
@@ -74,6 +72,9 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: 36,
     marginRight: 36,
+  },
+  title: {
+    textTransform: 'uppercase',
   },
   centerJustify: {
     justifyContent: 'center',
