@@ -12,7 +12,8 @@ import {
   H2,
 } from 'native-base';
 import {NavigationScreenProps} from 'react-navigation';
-import {StyleSheet} from 'react-native';
+import {Routes} from '../../navigation/routes';
+import styles from './search.screen.styles';
 
 export default class SearchScreen extends React.Component<
   NavigationScreenProps<unknown>
@@ -35,7 +36,8 @@ export default class SearchScreen extends React.Component<
               rounded
               large
               icon
-              style={[styles.cameraButton, styles.centerJustify]}>
+              style={[styles.cameraButton, styles.centerJustify]}
+              onPress={() => this.navigateToCamera()}>
               <Icon
                 style={[styles.cameraButtonIcon]}
                 name="camera-retro"
@@ -57,8 +59,7 @@ export default class SearchScreen extends React.Component<
             </Item>
           </Row>
           <Row size={1} style={[styles.centerJustify, styles.centerAlign]}>
-            <Button
-              onPress={() => this.props.navigation.navigate('SearchResult')}>
+            <Button onPress={() => this.navigateToResult()}>
               <Text>Search</Text>
             </Button>
           </Row>
@@ -66,28 +67,12 @@ export default class SearchScreen extends React.Component<
       </Container>
     );
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    marginLeft: 36,
-    marginRight: 36,
-  },
-  title: {
-    textTransform: 'uppercase',
-  },
-  centerJustify: {
-    justifyContent: 'center',
-  },
-  centerAlign: {
-    alignItems: 'center',
-  },
-  cameraButton: {
-    height: 200,
-    width: 200,
-    borderRadius: 100,
-  },
-  cameraButtonIcon: {
-    fontSize: 96,
-  },
-});
+  private navigateToResult(): void {
+    this.props.navigation.navigate(Routes.Result);
+  }
+
+  private navigateToCamera(): void {
+    this.props.navigation.navigate(Routes.Camera);
+  }
+}
