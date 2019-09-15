@@ -1,6 +1,7 @@
 import React from 'react';
-import {NavigationScreenProps} from 'react-navigation';
+import {NavigationScreenProps, StackActions} from 'react-navigation';
 import {RNCamera} from 'react-native-camera';
+import Toast from 'react-native-simple-toast';
 import {Container, Button} from 'native-base';
 import cameraStyles from './camera.styles';
 import {Routes} from '../../navigation/routes';
@@ -42,7 +43,7 @@ export default class CameraScreen extends React.Component<
         const captureResponse = await this.camera.takePictureAsync({
           base64: true,
           doNotSave: true,
-          quality: 0.2,
+          quality: 1,
           pauseAfterCapture: true,
         });
         if (captureResponse.base64) {
@@ -57,14 +58,19 @@ export default class CameraScreen extends React.Component<
   }
 
   private navigateToResult(base64Image: string): void {
-    this.props.navigation.navigate(Routes.Result, {
-      isImage: true,
-      data: base64Image,
-    } as ResultNavigationParams);
+    const navAction = StackActions.replace({
+      routeName: Routes.Result,
+      params: {
+        isImage: true,
+        data: base64Image,
+      } as ResultNavigationParams,
+    });
+    this.props.navigation.dispatch(navAction);
   }
 
   private navigateToSearch(): void {
-    // TODO: show toast with information about image capture failure
-    this.props.navigation.navigate(Routes.Search);
+    Toast.show('Could not capture image from camera.');
+    const navAction = StackActions.replace({routeName: Routes.Search});
+    this.props.navigation.dispatch(navAction);
   }
 }
