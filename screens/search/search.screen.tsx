@@ -14,15 +14,16 @@ import {
 import {NavigationScreenProps} from 'react-navigation';
 import {Routes} from '../../navigation/routes';
 import styles from './search.styles';
+import {ResultNavigationParams} from '../result/navigation.params';
+import {SearchState} from './search.state';
 
 export default class SearchScreen extends React.Component<
-  NavigationScreenProps<unknown>
+  NavigationScreenProps<unknown>,
+  SearchState
 > {
-  private searchPhrase: string = '';
-
-  onChangeSearchPhrase(searchPhrase: string): void {
-    this.searchPhrase = searchPhrase;
-  }
+  state: SearchState = {
+    searchPhrase: '',
+  };
 
   render(): JSX.Element {
     return (
@@ -53,13 +54,15 @@ export default class SearchScreen extends React.Component<
               <Icon name="search" type="FontAwesome" />
               <Input
                 placeholder="E.g. plastic bottle, paper bag..."
-                value={this.searchPhrase}
+                value={this.state.searchPhrase}
                 onChangeText={text => this.onChangeSearchPhrase(text)}
               />
             </Item>
           </Row>
           <Row size={1} style={[styles.centerJustify, styles.centerAlign]}>
-            <Button onPress={() => this.navigateToResult()}>
+            <Button
+              disabled={!this.state.searchPhrase}
+              onPress={() => this.navigateToResult()}>
               <Text>Search</Text>
             </Button>
           </Row>
@@ -68,8 +71,15 @@ export default class SearchScreen extends React.Component<
     );
   }
 
+  private onChangeSearchPhrase(searchPhrase: string): void {
+    this.setState({searchPhrase});
+  }
+
   private navigateToResult(): void {
-    this.props.navigation.navigate(Routes.Result);
+    this.props.navigation.navigate(Routes.Result, {
+      isImage: false,
+      data: this.state.searchPhrase,
+    } as ResultNavigationParams);
   }
 
   private navigateToCamera(): void {
