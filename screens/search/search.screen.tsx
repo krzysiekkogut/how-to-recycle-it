@@ -13,7 +13,7 @@ import {
 } from 'native-base';
 import {NavigationScreenProps} from 'react-navigation';
 import {Routes} from '../../navigation/routes';
-import styles from './search.screen.styles';
+import styles from './search.styles';
 
 export default class SearchScreen extends React.Component<
   NavigationScreenProps<unknown>
